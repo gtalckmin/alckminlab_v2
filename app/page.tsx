@@ -96,7 +96,7 @@ export default async function HomePage() {
           <p className="text-lg text-base-800/80">{profile?.bio}</p>
           {profile?.researchInterests?.length ? (
             <div className="flex flex-wrap gap-2 text-sm text-base-800/70">
-              {profile.researchInterests.map((interest) => (
+              {profile.researchInterests.map((interest: string) => (
                 <span key={interest} className="rounded-full bg-base-100 px-3 py-1">
                   {interest}
                 </span>
@@ -149,7 +149,7 @@ export default async function HomePage() {
           </Link>
         </div>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {posts?.map((post) => (
+          {posts?.map((post: Post) => (
             <article key={post._id} className="rounded-2xl bg-white p-5 shadow-soft">
               <p className="text-xs uppercase tracking-[0.2em] text-base-800/60">
                 {new Date(post.publishedAt).toLocaleDateString()}

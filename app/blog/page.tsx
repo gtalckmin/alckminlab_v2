@@ -12,7 +12,7 @@ const fallbackPosts: Post[] = [
   },
 ];
 
-async function loadPosts() {
+async function loadPosts(): Promise<Post[]> {
   const hasSanity = Boolean(process.env.SANITY_PROJECT_ID);
   if (!hasSanity) return fallbackPosts;
 

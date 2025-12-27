@@ -1,8 +1,6 @@
 import { fetchVideos } from "@/lib/sanity";
 import { Video } from "@/lib/types";
-import dynamic from "next/dynamic";
-
-const Player = dynamic(() => import("react-player"), { ssr: false });
+import { VideoPlayer } from "@/components/video-player";
 
 const fallbackVideos: Video[] = [
   {
@@ -36,7 +34,7 @@ export default async function VideosPage() {
         {videos.map((video) => (
           <article key={video._id} className="space-y-3 rounded-2xl bg-white p-4 shadow-soft">
             <div className="aspect-video overflow-hidden rounded-xl bg-base-100">
-              <Player url={video.url} width="100%" height="100%" controls />
+              <VideoPlayer url={video.url} />
             </div>
             <div className="space-y-1">
               <p className="text-xs uppercase tracking-[0.2em] text-base-800/60">{video.category}</p>
