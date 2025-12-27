@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+body {
+  @apply bg-base-50 text-base-900 font-body antialiased;
+}
+
+a {
+  @apply text-accent-600 hover:text-accent-500 transition-colors;
+}
+
+.prose h1, .prose h2, .prose h3, .prose h4 {
+  @apply font-heading text-base-900;
+}
