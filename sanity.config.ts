@@ -1,14 +1,12 @@
 import { defineConfig } from "sanity";
 import { deskTool } from "sanity/desk";
 import { schemaTypes } from "./sanity/schemas";
-
-const projectId = process.env.SANITY_PROJECT_ID;
-const dataset = process.env.SANITY_DATASET || "production";
+import { projectId, dataset } from "./sanity/env";
 
 export default defineConfig({
   name: "alckminlab",
   title: "Alckmin Lab Studio",
-  projectId: projectId || "your-project-id",
+  projectId,
   dataset,
   basePath: "/studio",
   plugins: [deskTool()],

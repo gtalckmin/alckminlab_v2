@@ -62,6 +62,14 @@ export async function fetchLatestPosts(limit = 3) {
   );
 }
 
+export async function fetchPostBySlug(slug: string) {
+  if (!sanityClient) return null;
+  return sanityClient.fetch(
+    groq`*[_type == "post" && slug.current == $slug][0]{${postFields}}`,
+    { slug }
+  );
+}
+
 export async function fetchLatestPublication() {
   if (!sanityClient) return null;
   return sanityClient.fetch(
