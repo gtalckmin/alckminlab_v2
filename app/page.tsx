@@ -5,23 +5,33 @@ import Link from "next/link";
 
 const fallbackProfile: Profile = {
   _id: "fallback-profile",
-  name: "Researcher Name",
-  bio: "Building resilient agroecosystems with data, models, and field experiments.",
-  social: [
-    { label: "LinkedIn", url: "https://linkedin.com" },
-    { label: "Google Scholar", url: "https://scholar.google.com" },
+  name: "Gustavo Togeiro de Alckmin",
+  nickname: "Gustavo",
+  greeting: "Hi, I am",
+  designation: "Postdoc Researcher",
+  company: "University of Missouri",
+  companyUrl: "https://muforagelivestock.org/",
+  bio: "I work with Remote Sensing and Machine Learning for Agriculture.",
+  summaryPoints: [
+    "I am an Ag-Tech Professional",
+    "I work with R & Python",
+    "I work on Remote Sensing",
   ],
-  researchInterests: ["Climate resilience", "Crop modeling", "Remote sensing"],
+  social: [
+    { label: "GitHub", url: "https://www.github.com/gtalckmin" },
+    { label: "LinkedIn", url: "https://www.linkedin.com/in/gtalckmin/" },
+  ],
+  researchInterests: ["Remote Sensing", "Machine Learning", "Precision Agriculture", "Spectroscopy"],
 };
 
 const fallbackPublication: Publication = {
   _id: "fallback-publication",
-  title: "Latest publication title",
-  slug: "latest-publication",
-  authors: ["You"],
-  venue: "Journal of Examples",
-  year: new Date().getFullYear(),
-  abstract: "Short abstract placeholder until Sanity content is connected.",
+  title: "Comparing methods to estimate perennial ryegrass biomass",
+  slug: "comparing-methods-ryegrass",
+  authors: ["Gustavo Togeiro de Alckmin", "et al."],
+  venue: "Precision Agriculture",
+  year: 2020,
+  abstract: "Comparison of different methods for estimating perennial ryegrass biomass using remote sensing techniques.",
 };
 
 const fallbackVideo: Video = {

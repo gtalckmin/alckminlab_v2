@@ -44,3 +44,92 @@
 - Implement locale switcher in header and translate UI strings
 - Add search/filter UI for publications (client-side filtering already year-based)
 - Write migration notes from Hugo/Quarto to this stack; archive old Netlify config
+
+---
+
+## Recent Updates (Dec 2025)
+
+### Dependency Upgrades
+| Package | Old | New |
+|---------|-----|-----|
+| `next` | ^14.x | ^16.1.1 |
+| `@sanity/client` | ^6.8.3 | ^7.13.2 |
+| `eslint` | ^8.56.0 | ^9.39.2 |
+| `eslint-config-next` | ^14.x | ^16.1.1 |
+| `sanity` | — | ^4.22.0 |
+| `next-sanity` | — | ^11.6.12 |
+
+### New Files & Features
+- **Single Post Page**: `app/blog/[slug]/page.tsx` — renders individual blog posts fetched via `fetchPostBySlug()`
+- **Video Player Component**: `components/video-player.tsx` — client-side wrapper for `react-player`
+- **Sanity Studio Integration**: embedded at `/studio` using `next-sanity/studio`
+- **Sanity CLI scaffolding**: `sanity/` directory with `env.ts`, `lib/`, `schemaTypes/`, `structure.ts`
+- **About Page**: `app/about/page.tsx` — displays profile, skills, education, and experience
+- **Projects Page**: `app/projects/page.tsx` — displays research and development projects
+- **New Sanity Schemas**: `skill.ts`, `education.ts`, `experience.ts`, `project.ts`
+- **Migration Data**: `scripts/migration-data.ts` — extracted content from Hugo site for Sanity import
+- **Enhanced Profile Schema**: added fields for nickname, greeting, designation, company, summaryPoints, email, resume
+
+### Configuration Changes
+- `next.config.mjs`: removed unsupported `experimental.turbo` and `i18n` blocks for App Router compatibility
+- `sanity.config.ts`: now imports `projectId` and `dataset` from `sanity/env.ts` (uses `NEXT_PUBLIC_*` env vars)
+- `tsconfig.json`: excludes `sanity/` directory from type-checking to avoid circular reference errors
+- `.env.example`: sanitized (no real tokens); use `.env.local` for actual secrets
+
+### Security
+- **Token rotation required**: API token was previously exposed in git history; rotate in [sanity.io/manage](https://sanity.io/manage)
+- Git history rewritten to remove the leaked commit; collaborators should `git fetch && git reset --hard origin/main`
+
+---
+
+## Content Workflow
+
+### Creating Blog Posts
+1. Start the dev server: `npm run dev`
+2. Open **Sanity Studio** at `http://localhost:3000/studio`
+3. Log in with your Sanity account (Google/GitHub)
+4. Click **Post** in the sidebar → **Create** (pencil icon)
+5. Fill in Title, Slug (click Generate), Date, Body
+6. Click **Publish**
+
+Posts appear automatically on `/blog` and the homepage "Latest News" section.
+
+### Creating Other Content
+| Content Type | Studio Location | Displays On |
+|--------------|-----------------|-------------|
+| Profile | Profiles | Homepage hero, `/about` |
+| Skill | Skills | `/about` |
+| Education | Education | `/about` |
+| Experience | Experiences | `/about` |
+| Project | Projects | `/projects` |
+| Publication | Publications | `/publications` |
+| Video | Videos | `/videos` |
+| Post | Posts | `/blog`, homepage |
+
+---
+
+## Known Issues / TODO
+
+- [x] `@portabletext/react` — already installed via `next-sanity` (v6.0.0)
+- [x] Content migration from Hugo — data extracted to `scripts/migration-data.ts`
+- [x] About page with skills, education, experience
+- [x] Projects page
+- [ ] Sanity image builder not wired up — `mainImage` shows placeholder; use `@sanity/image-url` to generate URLs
+- [ ] i18n removed from Next config — implement App Router internationalization pattern if needed
+- [ ] No dynamic OG images yet — consider `@vercel/og` for social sharing previews
+- [ ] Studio auth: currently open to logged-in Sanity users; consider Vercel password protection for production
+- [ ] Import migration data into Sanity (run `scripts/migration-data.ts` → NDJSON → `sanity dataset import`)
+
+---
+
+## Tech Stack Summary
+
+| Layer | Technology |
+|-------|------------|
+| Framework | Next.js 16 (App Router, Turbopack) |
+| CMS | Sanity v4 (embedded Studio at `/studio`) |
+| Styling | Tailwind CSS 3.4 + custom design tokens |
+| Data Fetching | `next-sanity` + GROQ queries |
+| Video | `react-player` (client component) |
+| Analytics | Vercel Analytics |
+| Deployment | Vercel |

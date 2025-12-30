@@ -12,6 +12,32 @@ export default defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
+      name: "nickname",
+      title: "Nickname / Short Name",
+      type: "string",
+    }),
+    defineField({
+      name: "greeting",
+      title: "Greeting",
+      type: "string",
+      description: "e.g., Hi, I am",
+    }),
+    defineField({
+      name: "designation",
+      title: "Designation / Title",
+      type: "string",
+    }),
+    defineField({
+      name: "company",
+      title: "Company / Organization",
+      type: "string",
+    }),
+    defineField({
+      name: "companyUrl",
+      title: "Company URL",
+      type: "url",
+    }),
+    defineField({
       name: "bio",
       title: "Bio",
       type: "text",
@@ -19,10 +45,28 @@ export default defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
+      name: "summaryPoints",
+      title: "Summary Points",
+      type: "array",
+      of: [{ type: "string" }],
+      description: "Short bullet points about yourself",
+    }),
+    defineField({
       name: "photo",
       title: "Photo",
       type: "image",
       options: { hotspot: true },
+    }),
+    defineField({
+      name: "resume",
+      title: "Resume / CV",
+      type: "file",
+      options: { accept: "application/pdf" },
+    }),
+    defineField({
+      name: "email",
+      title: "Email",
+      type: "string",
     }),
     defineField({
       name: "social",
@@ -36,6 +80,7 @@ export default defineType({
           fields: [
             defineField({ name: "label", title: "Label", type: "string" }),
             defineField({ name: "url", title: "URL", type: "url" }),
+            defineField({ name: "icon", title: "Icon (Font Awesome class)", type: "string" }),
           ],
         }),
       ],
@@ -50,7 +95,7 @@ export default defineType({
   preview: {
     select: {
       title: "name",
-      subtitle: "bio",
+      subtitle: "designation",
       media: "photo",
     },
   },

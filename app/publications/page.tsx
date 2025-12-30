@@ -22,9 +22,10 @@ async function loadPublications(): Promise<Publication[]> {
   return pubs?.length ? pubs : fallbackPublications;
 }
 
-export default async function PublicationsPage({ searchParams }: { searchParams?: { year?: string } }) {
+export default async function PublicationsPage({ searchParams }: { searchParams?: Promise<{ year?: string }> }) {
   const publications = await loadPublications();
-  const yearFilter = searchParams?.year ? Number(searchParams.year) : undefined;
+  const resolvedParams = await searchParams;
+  const yearFilter = resolvedParams?.year ? Number(resolvedParams.year) : undefined;
   const filtered = yearFilter
     ? publications.filter((p) => p.year === yearFilter)
     : publications;

@@ -48,10 +48,67 @@ export const videoFields = groq`
 export const profileFields = groq`
   _id,
   name,
+  nickname,
+  greeting,
+  designation,
+  company,
+  companyUrl,
   bio,
+  summaryPoints,
   photo,
+  resume,
+  email,
   social,
   researchInterests
+`;
+
+export const skillFields = groq`
+  _id,
+  name,
+  logo,
+  summary,
+  url,
+  percentage,
+  order
+`;
+
+export const educationFields = groq`
+  _id,
+  degree,
+  institution,
+  institutionUrl,
+  timeframe,
+  description,
+  publications,
+  activities,
+  order
+`;
+
+export const experienceFields = groq`
+  _id,
+  company,
+  companyUrl,
+  location,
+  overview,
+  position,
+  startDate,
+  endDate,
+  responsibilities,
+  order
+`;
+
+export const projectFields = groq`
+  _id,
+  name,
+  "slug": slug.current,
+  logo,
+  role,
+  timeline,
+  summary,
+  url,
+  repoUrl,
+  tags,
+  order
 `;
 
 export async function fetchLatestPosts(limit = 3) {
@@ -97,4 +154,24 @@ export async function fetchVideos() {
 export async function fetchProfile() {
   if (!sanityClient) return null;
   return sanityClient.fetch(groq`*[_type == "profile"][0]{${profileFields}}`);
+}
+
+export async function fetchSkills() {
+  if (!sanityClient) return null;
+  return sanityClient.fetch(groq`*[_type == "skill"]|order(order asc){${skillFields}}`);
+}
+
+export async function fetchEducation() {
+  if (!sanityClient) return null;
+  return sanityClient.fetch(groq`*[_type == "education"]|order(order asc){${educationFields}}`);
+}
+
+export async function fetchExperiences() {
+  if (!sanityClient) return null;
+  return sanityClient.fetch(groq`*[_type == "experience"]|order(order asc){${experienceFields}}`);
+}
+
+export async function fetchProjects() {
+  if (!sanityClient) return null;
+  return sanityClient.fetch(groq`*[_type == "project"]|order(order asc){${projectFields}}`);
 }
