@@ -1,38 +1,36 @@
 import { fetchProjects } from "@/lib/sanity";
 import { Project } from "@/lib/types";
-import Link from "next/link";
 
 const fallbackProjects: Project[] = [
   {
     _id: "1",
-    name: "Google Earth Engine (GEE)",
-    slug: "gee",
-    role: "Developer",
-    timeline: "March 2018 - Present",
-    summary: "Working with GEE for remote sensing analysis and satellite imagery processing.",
-    tags: ["professional", "academic", "remote-sensing"],
+    name: "Spectral analytics for pasture biomass and feed quality",
+    slug: "spectral-analytics-pasture-biomass",
+    role: "Doctoral research",
+    timeline: "2016 - 2021",
+    url: "https://doi.org/10.18174/544521",
+    summary: "A PhD research program focused on field and airborne spectroscopy to estimate perennial ryegrass biomass and feed quality with high accuracy.",
+    tags: ["research", "remote-sensing", "pasture-management"],
     order: 1,
   },
   {
     _id: "2",
-    name: "Coursera Data Science Specialization",
-    slug: "coursera-ds",
-    role: "Student",
-    timeline: "Jun 2017 - Present",
-    url: "https://www.coursera.org/specializations/jhu-data-science",
-    summary: "Coursera Data Science Specialization offered by Johns Hopkins University.",
-    tags: ["professional", "machine-learning"],
+    name: "Digital agriculture and remote sensing workflows",
+    slug: "digital-agriculture-remote-sensing-workflows",
+    role: "Applied research",
+    timeline: "2021 - Present",
+    summary: "Development of proximal sensors, satellite data pipelines, and web-based visualisation tools to support decision making in agricultural systems.",
+    tags: ["precision-agriculture", "machine-learning", "data-science"],
     order: 2,
   },
   {
     _id: "3",
-    name: "PhD Thesis",
-    slug: "phd-thesis",
-    role: "Candidate",
-    timeline: "May 2016 - May 2021",
-    url: "https://doi.org/10.18174/544521",
-    summary: "From field to airborne spectroscopy – advancing spectral data analytics for accurate retrieval of perennial ryegrass biomass and feed quality.",
-    tags: ["academic", "research"],
+    name: "Precision agriculture teaching and field analytics",
+    slug: "precision-agriculture-teaching",
+    role: "Academic leadership",
+    timeline: "2022 - Present",
+    summary: "Curriculum design and delivery for precision agriculture, crop monitoring, and remote sensing applications for agronomy students.",
+    tags: ["education", "agronomy", "remote-sensing"],
     order: 3,
   },
 ];
@@ -52,12 +50,12 @@ export default async function ProjectsPage() {
   const allTags = Array.from(new Set(projects.flatMap((p) => p.tags || [])));
 
   return (
-    <main className="space-y-6">
-      <header className="space-y-2">
-        <p className="text-xs uppercase tracking-[0.2em] text-base-800/60">Projects</p>
-        <h1 className="font-heading text-3xl">Research & Development</h1>
-        <p className="text-base-800/70">
-          A collection of academic and professional projects.
+    <main>
+      <header className="page-heading">
+        <p className="eyebrow">Projects</p>
+        <h1 className="page-title">Research &amp; development</h1>
+        <p className="page-lede">
+          Applied research and teaching initiatives spanning remote sensing, pasture systems, and precision agriculture.
         </p>
       </header>
 
@@ -66,7 +64,7 @@ export default async function ProjectsPage() {
           {allTags.map((tag) => (
             <span
               key={tag}
-              className="rounded-full bg-base-100 px-3 py-1 text-xs text-base-800/70"
+              className="tag"
             >
               {tag}
             </span>
@@ -74,21 +72,21 @@ export default async function ProjectsPage() {
         </div>
       )}
 
-      <div className="grid gap-6 md:grid-cols-2">
+      <div className="mt-8 grid gap-5 md:grid-cols-2">
         {projects.map((project) => (
           <article
             key={project._id}
-            className="flex flex-col rounded-2xl bg-white p-6 shadow-soft"
+            className="content-card flex flex-col p-6"
           >
             <div className="flex items-start justify-between gap-4">
               <div className="flex-1">
-                <h2 className="font-heading text-xl">{project.name}</h2>
+                <h2 className="font-heading text-2xl tracking-tight">{project.name}</h2>
                 {project.role && (
                   <p className="text-sm text-accent-600">{project.role}</p>
                 )}
               </div>
               {project.timeline && (
-                <span className="whitespace-nowrap rounded-full bg-base-100 px-3 py-1 text-xs text-base-800/60">
+                <span className="tag whitespace-nowrap">
                   {project.timeline}
                 </span>
               )}
@@ -103,7 +101,7 @@ export default async function ProjectsPage() {
                 {project.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="rounded-full bg-accent-50 px-2 py-0.5 text-xs text-accent-700"
+                    className="tag"
                   >
                     {tag}
                   </span>

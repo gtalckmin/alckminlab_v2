@@ -19,15 +19,6 @@ export type Publication = {
   abstract: string;
 };
 
-export type Video = {
-  _id: string;
-  title: string;
-  slug: string;
-  description: string;
-  url: string;
-  category: string;
-};
-
 export type Profile = {
   _id: string;
   name: string;

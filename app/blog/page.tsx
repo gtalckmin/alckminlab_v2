@@ -23,20 +23,21 @@ async function loadPosts(): Promise<Post[]> {
 export default async function BlogPage() {
   const posts = await loadPosts();
   return (
-    <main className="space-y-6">
-      <header className="space-y-2">
-        <p className="text-xs uppercase tracking-[0.2em] text-base-800/60">Blog</p>
-        <h1 className="font-heading text-3xl">Latest News</h1>
+    <main>
+      <header className="page-heading">
+        <p className="eyebrow">Journal</p>
+        <h1 className="page-title">Notes from the lab.</h1>
+        <p className="page-lede">Updates, ideas, and news from our work in agricultural remote sensing.</p>
       </header>
-      <div className="space-y-4">
+      <div className="news-list">
         {posts.map((post) => (
-          <article key={post._id} className="rounded-2xl bg-white p-5 shadow-soft">
-            <p className="text-xs uppercase tracking-[0.2em] text-base-800/60">
+          <article key={post._id} className="news-item">
+            <p className="news-item__date">
               {new Date(post.publishedAt).toLocaleDateString()}
             </p>
-            <h2 className="mt-2 font-heading text-xl leading-tight">{post.title}</h2>
-            <Link href={`/blog/${post.slug}`} className="mt-3 inline-block text-sm font-medium text-accent-600">
-              Read more
+            <h2 className="news-item__title">{post.title}</h2>
+            <Link href={`/blog/${post.slug}`} className="text-link" aria-label={`Read ${post.title}`}>
+              Read <span aria-hidden="true">↗</span>
             </Link>
           </article>
         ))}

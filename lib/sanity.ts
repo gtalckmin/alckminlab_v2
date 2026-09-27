@@ -36,15 +36,6 @@ export const publicationFields = groq`
   abstract
 `;
 
-export const videoFields = groq`
-  _id,
-  title,
-  "slug": slug.current,
-  description,
-  url,
-  category
-`;
-
 export const profileFields = groq`
   _id,
   name,
@@ -134,21 +125,9 @@ export async function fetchLatestPublication() {
   );
 }
 
-export async function fetchLatestVideo() {
-  if (!sanityClient) return null;
-  return sanityClient.fetch(
-    groq`*[_type == "video"]|order(_createdAt desc)[0]{${videoFields}}`
-  );
-}
-
 export async function fetchPublications() {
   if (!sanityClient) return null;
   return sanityClient.fetch(groq`*[_type == "publication"]|order(year desc){${publicationFields}}`);
-}
-
-export async function fetchVideos() {
-  if (!sanityClient) return null;
-  return sanityClient.fetch(groq`*[_type == "video"]|order(_createdAt desc){${videoFields}}`);
 }
 
 export async function fetchProfile() {

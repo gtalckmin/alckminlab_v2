@@ -1,17 +1,26 @@
-export default function ContactPage() {
+import { fetchProfile } from "@/lib/sanity";
+
+const fallbackEmail = "gustavo.togeirodealckmin@uwa.edu.au";
+
+export default async function ContactPage() {
+  const profile = await fetchProfile();
+  const email = profile?.email || fallbackEmail;
+
   return (
-    <main className="space-y-4">
-      <p className="text-xs uppercase tracking-[0.2em] text-base-800/60">Contact</p>
-      <h1 className="font-heading text-3xl">Get in touch</h1>
-      <p className="text-base text-base-800/80">
-        For collaborations, speaking engagements, or student opportunities, reach out via email.
-      </p>
-      <div className="rounded-2xl bg-white p-6 shadow-soft">
-        <p className="text-sm text-base-800/70">Email</p>
-        <a href="mailto:you@example.com" className="text-lg font-medium text-accent-600">
-          you@example.com
+    <main>
+      <header className="page-heading">
+        <p className="eyebrow">Contact</p>
+        <h1 className="page-title">Let’s connect.</h1>
+        <p className="page-lede">
+          For collaborations, research partnerships, teaching opportunities, and digital agriculture projects, please get in touch.
+        </p>
+      </header>
+      <section className="content-card max-w-2xl p-7 sm:p-10">
+        <p className="feature-card__label">Email</p>
+        <a href={`mailto:${email}`} className="mt-3 inline-block break-all font-heading text-2xl text-accent-600 sm:text-3xl">
+          {email} <span aria-hidden="true">↗</span>
         </a>
-      </div>
+      </section>
     </main>
   );
 }

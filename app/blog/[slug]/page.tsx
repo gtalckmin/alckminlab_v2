@@ -1,7 +1,6 @@
 import { fetchPostBySlug } from "@/lib/sanity";
 import { Post } from "@/lib/types";
 import { PortableText } from "@portabletext/react";
-import Image from "next/image";
 import { notFound } from "next/navigation";
 
 const fallbackPost: Post = {
@@ -43,16 +42,16 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   }
 
   return (
-    <article className="mx-auto max-w-3xl space-y-8 bg-white p-8 rounded-3xl shadow-soft">
-      <header className="space-y-4 text-center">
-        <p className="text-sm uppercase tracking-[0.2em] text-base-800/60">
+    <article className="content-card mx-auto max-w-4xl p-6 sm:p-10 lg:p-14">
+      <header className="mx-auto max-w-3xl space-y-4">
+        <p className="eyebrow">
           {new Date(post.publishedAt).toLocaleDateString()}
         </p>
-        <h1 className="font-heading text-3xl sm:text-4xl">{post.title}</h1>
+        <h1 className="font-heading text-4xl tracking-tight text-base-900 sm:text-5xl">{post.title}</h1>
       </header>
 
       {post.mainImage && (
-        <div className="relative aspect-video w-full overflow-hidden rounded-2xl">
+        <div className="relative mt-8 aspect-video w-full overflow-hidden rounded-xl">
           {/* Note: You'll need a proper image builder for Sanity images in production */}
           <div className="absolute inset-0 bg-base-200 flex items-center justify-center text-base-400">
             Image Placeholder
@@ -60,7 +59,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         </div>
       )}
 
-      <div className="prose prose-lg prose-stone mx-auto">
+      <div className="prose prose-lg prose-stone mx-auto mt-10 max-w-3xl">
         <PortableText value={post.body} />
       </div>
     </article>

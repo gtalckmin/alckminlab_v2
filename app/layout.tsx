@@ -8,16 +8,20 @@ export const metadata = {
     default: "Alckmin Lab",
     template: "%s | Alckmin Lab",
   },
-  description: "Academic modern profile for research outputs, publications, and videos",
+  description: "Research and teaching in remote sensing, precision agriculture, and digital agronomy.",
 };
 
 export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang="en">
       <body className="min-h-screen bg-base-50 text-base-900">
-        <div className="mx-auto max-w-6xl px-6 pb-12">
+        <div className="site-container flex min-h-screen flex-col">
           <Header />
-          {children}
+          <div className="site-main flex-1">{children}</div>
+          <footer className="site-footer">
+            <p>Alckmin Lab · Remote sensing, precision agriculture, and data</p>
+            <p>Applying Earth observation and data science for resilient, productive agricultural systems.</p>
+          </footer>
         </div>
         <Analytics />
       </body>
