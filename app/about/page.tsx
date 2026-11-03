@@ -281,6 +281,9 @@ export default async function AboutPage() {
             )}
           </p>
           <p className="max-w-3xl text-base leading-relaxed text-base-800/80">{profile.bio}</p>
+          <p className="max-w-3xl text-sm font-medium text-accent-600">
+            Australian citizen · Open to relocation for academic and professional opportunities
+          </p>
 
           {profile.summaryPoints?.length ? (
             <ul className="grid gap-2 text-sm text-base-800/70 sm:grid-cols-2">

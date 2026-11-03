@@ -20,6 +20,10 @@ export default async function ContactPage() {
         <a href={`mailto:${email}`} className="mt-3 inline-block break-all font-heading text-2xl text-accent-600 sm:text-3xl">
           {email} <span aria-hidden="true">↗</span>
         </a>
+        <p className="feature-card__label mt-8">Availability</p>
+        <p className="mt-3 text-base-800/80">
+          Australian citizen, able to relocate for academic and professional opportunities.
+        </p>
       </section>
     </main>
   );
