@@ -1,5 +1,8 @@
 import { fetchProfile } from "@/lib/sanity";
 
+// Refresh Sanity content every 5 minutes without a redeploy.
+export const revalidate = 300;
+
 const fallbackEmail = "gtalckmin@hotmail.com";
 
 export default async function ContactPage() {

@@ -2,6 +2,9 @@ import { fetchLatestPosts, fetchLatestPublication, fetchProfile } from "@/lib/sa
 import { Post, Publication, Profile } from "@/lib/types";
 import Link from "next/link";
 
+// Refresh Sanity content every 5 minutes without a redeploy.
+export const revalidate = 300;
+
 const fallbackProfile: Profile = {
   _id: "fallback-profile",
   name: "Gustavo Togeiro de Alckmin",

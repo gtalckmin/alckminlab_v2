@@ -1,6 +1,9 @@
 import { fetchProjects } from "@/lib/sanity";
 import { Project } from "@/lib/types";
 
+// Refresh Sanity content every 5 minutes without a redeploy.
+export const revalidate = 300;
+
 const fallbackProjects: Project[] = [
   {
     _id: "1",

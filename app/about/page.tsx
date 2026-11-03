@@ -3,6 +3,9 @@ import { certifications, certificationsByTopic } from "@/lib/certifications";
 import { fetchProfile, fetchSkills, fetchEducation, fetchExperiences } from "@/lib/sanity";
 import { Profile, Skill, Education, Experience } from "@/lib/types";
 
+// Refresh Sanity content every 5 minutes without a redeploy.
+export const revalidate = 300;
+
 const fallbackProfile: Profile = {
   _id: "fallback",
   name: "Gustavo Togeiro de Alckmin",

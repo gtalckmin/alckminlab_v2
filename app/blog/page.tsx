@@ -2,6 +2,9 @@ import Link from "next/link";
 import { fetchLatestPosts } from "@/lib/sanity";
 import { Post } from "@/lib/types";
 
+// Refresh Sanity content every 5 minutes without a redeploy.
+export const revalidate = 300;
+
 const fallbackPosts: Post[] = [
   {
     _id: "fallback-post-1",
