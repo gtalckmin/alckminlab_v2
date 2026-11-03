@@ -30,6 +30,8 @@ const fallbackProfile: Profile = {
   email: "gtalckmin@hotmail.com",
   social: [
     { label: "GitHub", url: "https://www.github.com/gtalckmin" },
+    { label: "Google Scholar", url: "https://scholar.google.com/citations?user=F3d-wL4AAAAJ" },
+    { label: "ORCID", url: "https://orcid.org/0000-0002-0665-9426" },
     { label: "LinkedIn", url: "https://www.linkedin.com/in/gtalckmin/" },
     { label: "Twitter", url: "https://twitter.com/GustavoTA8" },
   ],

@@ -38,7 +38,14 @@ export const personJsonLd = {
     "Large language models",
     "Generative AI",
   ],
+  identifier: {
+    "@type": "PropertyValue",
+    propertyID: "ORCID",
+    value: "0000-0002-0665-9426",
+  },
   sameAs: [
+    "https://orcid.org/0000-0002-0665-9426",
+    "https://scholar.google.com/citations?user=F3d-wL4AAAAJ",
     "https://www.linkedin.com/in/gtalckmin/",
     "https://www.github.com/gtalckmin",
     "https://twitter.com/GustavoTA8",
