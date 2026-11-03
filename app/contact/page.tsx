@@ -1,5 +1,11 @@
 import { fetchProfile } from "@/lib/sanity";
 
+export const metadata = {
+  title: "Contact",
+  description: "Get in touch with Gustavo Alckmin for collaborations, consultancy, and academic or professional opportunities.",
+  alternates: { canonical: "/contact" },
+};
+
 // Refresh Sanity content every 5 minutes without a redeploy.
 export const revalidate = 300;
 

@@ -2,6 +2,8 @@ import { certifications, certificationsByTopic } from "@/lib/certifications";
 
 export const metadata = {
   title: "Certifications",
+  description: "Online certifications held by Gustavo Alckmin in generative AI, MLOps, deep learning, geospatial analysis, and data science.",
+  alternates: { canonical: "/certifications" },
 };
 
 export default function CertificationsPage() {

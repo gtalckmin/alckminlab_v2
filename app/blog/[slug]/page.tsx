@@ -2,6 +2,41 @@ import { fetchPostBySlug } from "@/lib/sanity";
 import { Post } from "@/lib/types";
 import { PortableText } from "@portabletext/react";
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
+import { personName, siteUrl } from "@/lib/site";
+
+function postExcerpt(post: Post, length = 160) {
+  const text = (post.body ?? [])
+    .filter((block: any) => block._type === "block" && block.style === "normal")
+    // Skip italic-only notes such as "Originally published on…".
+    .filter((block: any) => !block.children?.every((child: any) => child.marks?.includes("em")))
+    .flatMap((block: any) => block.children?.map((child: any) => child.text) ?? [])
+    .join(" ")
+    .replace(/\s+/g, " ")
+    .trim();
+  return text.length > length ? `${text.slice(0, length - 1).trimEnd()}…` : text;
+}
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params;
+  const post: Post | null = process.env.SANITY_PROJECT_ID ? await fetchPostBySlug(slug) : null;
+  if (!post) return {};
+  const description = postExcerpt(post);
+  return {
+    title: post.title,
+    description,
+    authors: [{ name: personName, url: siteUrl }],
+    alternates: { canonical: `/blog/${post.slug}` },
+    openGraph: {
+      type: "article",
+      title: post.title,
+      description,
+      url: `/blog/${post.slug}`,
+      publishedTime: post.publishedAt,
+      authors: [personName],
+    },
+  };
+}
 
 const fallbackPost: Post = {
   _id: "fallback-post-1",
@@ -41,8 +76,19 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     notFound();
   }
 
+  const articleJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: post.title,
+    description: postExcerpt(post),
+    datePublished: post.publishedAt,
+    url: `${siteUrl}/blog/${post.slug}`,
+    author: { "@id": `${siteUrl}/#person`, "@type": "Person", name: personName, url: siteUrl },
+  };
+
   return (
     <article className="content-card mx-auto max-w-4xl p-6 sm:p-10 lg:p-14">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }} />
       <header className="mx-auto max-w-3xl space-y-4">
         <p className="eyebrow">
           {new Date(post.publishedAt).toLocaleDateString()}

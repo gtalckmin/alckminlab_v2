@@ -1,5 +1,11 @@
 import Link from "next/link";
 
+export const metadata = {
+  title: "Consultancy",
+  description: "Consultancy by Gustavo Alckmin in remote sensing, precision agriculture, APSIM crop modelling, radiative transfer, phenotyping, and generative AI.",
+  alternates: { canonical: "/consultancy" },
+};
+
 const services = [
   {
     title: "Remote sensing & Earth observation",

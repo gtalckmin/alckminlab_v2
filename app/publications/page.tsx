@@ -2,6 +2,12 @@ import { fetchPublications } from "@/lib/sanity";
 import { Publication } from "@/lib/types";
 import Link from "next/link";
 
+export const metadata = {
+  title: "Publications",
+  description: "Peer-reviewed publications by Gustavo Togeiro de Alckmin on remote sensing, spectroscopy, and pasture monitoring.",
+  alternates: { canonical: "/publications" },
+};
+
 const fallbackPublications: Publication[] = [
   {
     _id: "fallback-publication",

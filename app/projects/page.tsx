@@ -1,6 +1,12 @@
 import { fetchProjects } from "@/lib/sanity";
 import { Project } from "@/lib/types";
 
+export const metadata = {
+  title: "Projects",
+  description: "Research and development by Gustavo Alckmin: spectroscopy and chemometrics, UAVs and UGVs, fast prototyping, and LLM agents for agriculture.",
+  alternates: { canonical: "/projects" },
+};
+
 // Refresh Sanity content every 5 minutes without a redeploy.
 export const revalidate = 300;
 

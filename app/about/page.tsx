@@ -3,6 +3,12 @@ import { certifications, certificationsByTopic } from "@/lib/certifications";
 import { fetchProfile, fetchSkills, fetchEducation, fetchExperiences } from "@/lib/sanity";
 import { Profile, Skill, Education, Experience } from "@/lib/types";
 
+export const metadata = {
+  title: "About Gustavo Alckmin",
+  description: "Background, skills, education, and experience of Gustavo Togeiro de Alckmin, University Lecturer in precision agriculture at The University of Western Australia.",
+  alternates: { canonical: "/about" },
+};
+
 // Refresh Sanity content every 5 minutes without a redeploy.
 export const revalidate = 300;
 
