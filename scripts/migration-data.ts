@@ -29,9 +29,9 @@ export const profileData = {
     "I measure grass for a living",
     "M-I-Z-Z-O-U!",
   ],
-  email: "gustavo.togeirodealckmin@missouri.edu",
+  email: "gtalckmin@hotmail.com",
   social: [
-    { label: "Email", url: "mailto:gustavo.togeirodealckmin@missouri.edu", icon: "fas fa-envelope" },
+    { label: "Email", url: "mailto:gtalckmin@hotmail.com", icon: "fas fa-envelope" },
     { label: "GitHub", url: "https://www.github.com/gtalckmin", icon: "fab fa-github" },
     { label: "WhatsApp", url: "https://wa.me/message/JHMF5ARIGFTSB1", icon: "fab fa-whatsapp" },
     { label: "LinkedIn", url: "https://www.linkedin.com/in/gtalckmin/", icon: "fab fa-linkedin" },

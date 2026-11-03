@@ -1,3 +1,5 @@
+import Link from "next/link";
+import { certifications, certificationsByTopic } from "@/lib/certifications";
 import { fetchProfile, fetchSkills, fetchEducation, fetchExperiences } from "@/lib/sanity";
 import { Profile, Skill, Education, Experience } from "@/lib/types";
 
@@ -16,7 +18,7 @@ const fallbackProfile: Profile = {
     "Remote sensing and machine learning for pasture systems",
     "Proximal sensing and satellite time-series analysis",
   ],
-  email: "gustavo.togeirodealckmin@uwa.edu.au",
+  email: "gtalckmin@hotmail.com",
   social: [
     { label: "GitHub", url: "https://www.github.com/gtalckmin" },
     { label: "LinkedIn", url: "https://www.linkedin.com/in/gtalckmin/" },
@@ -217,69 +219,6 @@ const fallbackExperiences: Experience[] = [
     order: 9,
   },
 ];
-
-const certifications = [
-  ["Deploying AI into Production with FastAPI", "DataCamp", "Dec 2025"],
-  ["Graph RAG with LangChain and Neo4j", "DataCamp", "Dec 2025"],
-  ["Multi-Agent Systems with LangGraph", "DataCamp", "Dec 2025"],
-  ["AI Agents with Hugging Face smolagents", "DataCamp", "Dec 2025"],
-  ["Reinforcement Learning from Human Feedback (RLHF)", "DataCamp", "Dec 2025"],
-  ["Fine-Tuning with Llama 3", "DataCamp", "Apr 2025"],
-  ["Working with Hugging Face", "DataCamp", "Apr 2025"],
-  ["Introduction to Deep Learning with PyTorch", "DataCamp", "Apr 2025"],
-  ["Machine Learning Engineering for Production (MLOps) Specialization", "DeepLearning.AI", "Nov 2023"],
-  ["Machine Learning Engineering for Production (MLOps)", "DeepLearning.AI", "Nov 2023"],
-  ["Machine Learning Modeling Pipelines in Production", "DeepLearning.AI", "Nov 2023"],
-  ["Machine Learning Data Lifecycle in Production", "Coursera", "Sep 2023"],
-  ["Introduction to Machine Learning in Production", "Coursera", "Jun 2023"],
-  ["DeepLearning.AI TensorFlow Developer Specialization", "DeepLearning.AI", "Dec 2022"],
-  ["Sequences, Time Series and Prediction", "Coursera", "Dec 2022"],
-  ["DeepLearning.AI Tensorflow Developer", "DeepLearning.AI", "Dec 2022"],
-  ["Natural Language Processing in TensorFlow", "DeepLearning.AI", "Dec 2022"],
-  ["Convolutional Neural Networks in TensorFlow", "Coursera", "Nov 2022"],
-  ["Introduction to TensorFlow for Artificial Intelligence, Machine Learning, and Deep Learning", "Coursera", "Sep 2022"],
-  ["Visualizing Geospatial Data in Python", "DataCamp", "Mar 2022"],
-  ["Spatial Data with R Track", "DataCamp", "Mar 2022"],
-  ["Spatial Statistics in R", "DataCamp", "Mar 2022"],
-  ["Interactive Maps with leaflet in R", "DataCamp", "Mar 2022"],
-  ["Writing Efficient R Code", "DataCamp", "Mar 2022"],
-  ["Hierarchical and Mixed Effects Models in R", "DataCamp", "Mar 2022"],
-  ["Deep Learning in Python Track", "DataCamp", "Feb 2022"],
-  ["Introduction to Deep Learning with PyTorch", "DataCamp", "Feb 2022"],
-  ["Introduction to TensorFlow in Python", "DataCamp", "Feb 2022"],
-  ["Introduction to Deep Learning in Python", "DataCamp", "Feb 2022"],
-  ["Python Programming Track", "DataCamp", "Feb 2022"],
-  ["Unit Testing for Data Science in Python", "DataCamp", "Feb 2022"],
-  ["Software Engineering for Data Scientists in Python", "DataCamp", "Jan 2022"],
-  ["Data Manipulation with pandas", "DataCamp", "Jan 2022"],
-  ["Parallel Programming with Dask in Python", "DataCamp", "Jan 2022"],
-  ["Writing Functions in Python", "DataCamp", "Jan 2022"],
-  ["ARIMA Models in R", "DataCamp", "Jan 2022"],
-  ["Writing Efficient Code with pandas", "DataCamp", "Jan 2022"],
-  ["Introduction to TensorFlow in R", "DataCamp", "Jan 2022"],
-  ["Image Processing with Python Track", "DataCamp", "Jan 2022"],
-  ["Writing Efficient Python Code", "DataCamp", "Jan 2022"],
-  ["Cloud Computing for Everyone", "DataCamp", "Jan 2021"],
-  ["Intermediate SQL", "DataCamp", "Oct 2021"],
-  ["Joining Data in SQL", "DataCamp", "Oct 2021"],
-  ["Advanced Deep Learning with Keras", "DataCamp", "Aug 2021"],
-  ["Image Processing with Keras in Python", "DataCamp", null],
-  ["Image Processing in Python", "DataCamp", "Jul 2021"],
-  ["Python Fundamentals Track", "DataCamp", "Jul 2021"],
-  ["Forecasting in R", "DataCamp", "Jul 2021"],
-  ["R Programming", "Coursera", "Feb 2019"],
-  ["Neural Networks and Deep Learning", "Coursera", null],
-  ["Machine Learning: Classification", "Coursera", "Jul 2017"],
-  ["Machine Learning: Regression", "Coursera", "Jun 2017"],
-  ["Machine Learning Foundations: A Case Study Approach", "Coursera Course Certificates", "Aug 2016"],
-  ["Fundamentals of GIS", "Coursera Course Certificates", "Aug 2016"],
-  ["The Data Scientist's Toolbox", "Coursera Course Certificates", "Jan 2016"],
-  ["Dairy Production and Management", "Coursera Course Certificates", "Jun 2016"],
-] as const;
-
-const certificationYears = Array.from(
-  new Set(certifications.map(([, , issued]) => issued?.slice(-4) ?? "Undated")),
-).sort((a, b) => (a === "Undated" ? 1 : b === "Undated" ? -1 : b.localeCompare(a)));
 
 async function loadData() {
   const hasSanity = Boolean(process.env.SANITY_PROJECT_ID);
@@ -537,30 +476,24 @@ export default async function AboutPage() {
         </div>
       </section>
 
-      <section className="space-y-6">
+      <section>
         <div className="mb-5">
           <p className="eyebrow">Professional development</p>
           <h2 className="section-title mt-3">Licenses &amp; certifications</h2>
-          <p className="mt-2 text-sm text-base-800/70">{certifications.length} credentials from LinkedIn</p>
+          <p className="mt-2 text-sm text-base-800/70">
+            {certifications.length} online credentials, grouped by topic.
+          </p>
         </div>
-        {certificationYears.map((year) => (
-          <div key={year}>
-            <h3 className="mb-3 font-heading text-xl">{year}</h3>
-            <ul className="grid gap-3 sm:grid-cols-2">
-              {certifications
-                .map(([name, issuer, issued], index) => ({ name, issuer, issued, index }))
-                .filter((credential) => (credential.issued?.slice(-4) ?? "Undated") === year)
-                .map(({ name, issuer, issued, index }) => (
-                  <li key={`${name}-${index}`} className="content-card p-4">
-                    <h4 className="font-medium leading-snug">{name}</h4>
-                    <p className="mt-1 text-sm text-base-800/70">
-                      {issuer} <span aria-hidden="true">·</span> {issued ?? "Date not listed"}
-                    </p>
-                  </li>
-                ))}
-            </ul>
-          </div>
-        ))}
+        <div className="flex flex-wrap gap-2">
+          {certificationsByTopic().map((group) => (
+            <Link key={group.slug} href={`/certifications#${group.slug}`} className="tag hover:underline">
+              {group.title} ({group.items.length})
+            </Link>
+          ))}
+        </div>
+        <Link href="/certifications" className="button-secondary mt-6 inline-block">
+          View all certifications
+        </Link>
       </section>
     </main>
   );

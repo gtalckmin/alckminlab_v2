@@ -1,6 +1,6 @@
 import { fetchProfile } from "@/lib/sanity";
 
-const fallbackEmail = "gustavo.togeirodealckmin@uwa.edu.au";
+const fallbackEmail = "gtalckmin@hotmail.com";
 
 export default async function ContactPage() {
   const profile = await fetchProfile();
